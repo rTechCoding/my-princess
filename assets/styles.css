@@ -789,6 +789,13 @@ img {
     .slider-caption-text {
         font-size: 1.5rem;
     }
+
+   .pass-input-wrapper {
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 }
 
 /* ==========================================================================
