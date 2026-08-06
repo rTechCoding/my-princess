@@ -6,10 +6,10 @@
     'use strict';
 
     const defaultState = {
-        partnerName: 'Sweetheart',
-        proposerName: 'Your Forever Lover',
+        partnerName: 'Sana Fatmee',
+        proposerName: 'Rahat Ansari',
         proposalQuestion: 'Will You Be My Forever & Always?',
-        startDate: '2025-10-12',
+        startDate: '2026-04-03',
         musicUrl: 'https://archive.org/download/best-of-2023-bollywood-songs/Zara%20Hatke%20Zara%20Bachke%20%282023%29%20-%20Phir%20Aur%20Kya%20Chahiye.mp3',
         story1: 'From the moment our eyes first met, the world seemed to turn in slow motion. Your warm smile lit up even the darkest corners of my soul.',
         story2: 'Through every shared laugh, every late-night conversation, and every quiet moment holding hands, I realized that you are my home and my greatest adventure.',
