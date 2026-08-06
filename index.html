@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Forever Proposal | For My Special Someone 💖</title>
+    <meta name="description" content="An interactive romantic proposal experience with glowing 3D heart animations, custom love letters, ambient soundscapes, and unforgettable memories.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <!-- Background Animation Canvas (Petals, Stars, Fireworks) -->
+    <canvas id="bg-canvas"></canvas>
+    <div id="ambient-glow"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="heart-icon">💖</span>
+            <span class="brand-text">Forever & Always</span>
+        </div>
+        <div class="nav-actions">
+            <button id="audio-toggle-btn" class="nav-btn glow-effect" aria-label="Toggle Romantic Music">
+                <span id="audio-icon">🎵</span>
+                <span id="audio-label">Music Off</span>
+            </button>
+            <button id="customizer-open-btn" class="nav-btn glow-effect" aria-label="Customize Proposal" style="display: none;">
+                <span>⚙️</span>
+                <span>Customize</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Hero & 3D Interactive Heart Section -->
+        <section class="hero-section">
+            <div class="heart-wrapper">
+                <canvas id="heart-canvas" width="400" height="400"></canvas>
+                <div class="heart-pulse-glow"></div>
+            </div>
+            
+            <h1 class="main-title">
+                To My Beloved <span id="display-partner-name" class="highlight-name">My Love</span>
+            </h1>
+            <p class="subtitle">Every second with you is a beautiful fairytale come true.</p>
+
+            <!-- Love Duration Counter -->
+            <div class="love-counter-card glass-panel">
+                <div class="counter-header">
+                    <span class="sparkle">✨</span>
+                    <span>Time Spent Falling In Love</span>
+                    <span class="sparkle">✨</span>
+                </div>
+                <div class="timer-grid">
+                    <div class="timer-box">
+                        <span id="days-count" class="timer-val">00</span>
+                        <span class="timer-label">Days</span>
+                    </div>
+                    <div class="timer-colon">:</div>
+                    <div class="timer-box">
+                        <span id="hours-count" class="timer-val">00</span>
+                        <span class="timer-label">Hours</span>
+                    </div>
+                    <div class="timer-colon">:</div>
+                    <div class="timer-box">
+                        <span id="minutes-count" class="timer-val">00</span>
+                        <span class="timer-label">Minutes</span>
+                    </div>
+                    <div class="timer-colon">:</div>
+                    <div class="timer-box">
+                        <span id="seconds-count" class="timer-val">00</span>
+                        <span class="timer-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#story-section" class="scroll-down-btn" aria-label="Scroll to story">
+                <span>Read Our Story</span>
+                <span class="down-arrow">↓</span>
+            </a>
+        </section>
+
+        <!-- Memory Polaroid Photo Carousel Section -->
+        <section class="memories-section">
+            <div class="section-badge">Precious Moments</div>
+            <h2 class="section-title">Memories We Cherish</h2>
+            <p class="section-subnote">✨ Click any photo memory to open the romantic slider!</p>
+            
+            <div class="polaroid-grid">
+                <div class="polaroid-card tilt-left" data-index="0">
+                    <div class="polaroid-img-wrapper">
+                        <img id="photo-1" src="img/s1.jpg" alt="Romantic Sunset Walk" loading="lazy" ondragstart="return false;">
+                        <div class="img-protection-overlay"></div>
+                        <div class="hover-heart-badge">💖 Click to Expand</div>
+                    </div>
+                    <p id="caption-1" class="polaroid-caption">The day our hearts aligned 🌅</p>
+                </div>
+
+                <div class="polaroid-card tilt-center" data-index="1">
+                    <div class="polaroid-img-wrapper">
+                        <img id="photo-2" src="img/s2.jpg" alt="Holding Hands" loading="lazy" ondragstart="return false;">
+                        <div class="img-protection-overlay"></div>
+                        <div class="hover-heart-badge">💖 Click to Expand</div>
+                    </div>
+                    <p id="caption-2" class="polaroid-caption">In your hands, I found home 🤝</p>
+                </div>
+
+                <div class="polaroid-card tilt-right" data-index="2">
+                    <div class="polaroid-img-wrapper">
+                        <img id="photo-3" src="img/s3.png" alt="Stargazing Together" loading="lazy" ondragstart="return false;">
+                        <div class="img-protection-overlay"></div>
+                        <div class="hover-heart-badge">💖 Click to Expand</div>
+                    </div>
+                    <p id="caption-3" class="polaroid-caption">Under a million shining stars ✨</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Romantic Mini Games Section -->
+        <section id="games-section" class="games-section">
+            <div class="section-badge">Fun &amp; Playful</div>
+            <h2 class="section-title">Romantic Mini-Games</h2>
+
+            <!-- Tab Selector for Mini Games -->
+            <div class="games-tabs">
+                <button class="game-tab-btn active" data-game="memory">🧩 Card Match</button>
+                <button class="game-tab-btn" data-game="catcher">🍓 Catch Hearts</button>
+                <button class="game-tab-btn" data-game="quiz">💘 Love Quiz</button>
+            </div>
+
+            <div class="games-container glass-panel">
+                <!-- Game 1: Memory Card Match -->
+                <div id="game-memory" class="game-panel active">
+                    <div class="game-header">
+                        <h3>Love Match Memory</h3>
+                        <p>Flip and match all romantic pairs to unlock a secret message!</p>
+                    </div>
+                    <div id="memory-grid" class="memory-grid"></div>
+                    <div id="memory-win-msg" class="game-win-banner hidden">
+                        <span>🎉 Perfect Match! You unlocked: <em>"You hold the key to my heart forever!"</em> 💖</span>
+                    </div>
+                </div>
+
+                <!-- Game 2: Heart Catcher Arcade -->
+                <div id="game-catcher" class="game-panel">
+                    <div class="game-header">
+                        <h3>Catch Falling Hearts</h3>
+                        <p>Move the basket (mouse/touch) to catch 10 glowing hearts in 20 seconds!</p>
+                        <div class="catcher-stats">
+                            <span>Score: <strong id="catcher-score">0</strong> / 10</span>
+                            <span>Time: <strong id="catcher-timer">20</strong>s</span>
+                        </div>
+                    </div>
+                    <div class="catcher-game-area" id="catcher-area">
+                        <canvas id="catcher-canvas" width="600" height="320"></canvas>
+                        <button id="start-catcher-btn" class="game-start-btn">Start Catching! 💖</button>
+                    </div>
+                </div>
+
+                <!-- Game 3: Love Quiz Connection -->
+                <div id="game-quiz" class="game-panel">
+                    <div class="game-header">
+                        <h3>Our Love Connection Quiz</h3>
+                        <p>Answer 3 fun questions to test our love compatibility!</p>
+                    </div>
+                    <div id="quiz-box" class="quiz-box">
+                        <h4 id="quiz-question" class="quiz-q-text">Question 1: What makes every day special?</h4>
+                        <div id="quiz-options" class="quiz-options"></div>
+                    </div>
+                    <div id="quiz-result" class="game-win-banner hidden">
+                        <span>💯 100% Eternal Love Match! We are made for each other! 💍✨</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Romantic Story Section with Infinite Photo Marquee Slider -->
+        <section id="story-section" class="story-section marquee-bg-section">
+            <div class="section-badge">Our Journey</div>
+            <h2 class="section-title">Memories In Motion</h2>
+            <p class="section-subnote">✨ Hover to pause &amp; click any photo memory to expand in full slider!</p>
+
+            <!-- Infinite Auto-Scrolling Photo Marquee Track -->
+            <div class="marquee-wrapper">
+                <div class="marquee-track">
+                    <!-- First Set of Tilted Polaroid Photos -->
+                    <div class="marquee-item tilt-left" data-index="4">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-4" src="img/s4.jpg" alt="You are the missing piece to my puzzle ❤️🧩" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-right" data-index="5">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-5" src="img/s5.jpg" alt="Every love story is beautiful, but ours is my favorite 🌟❤️" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-left" data-index="6">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-6" src="img/s6.png" alt="Together is my favorite place to be 💑❤️" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-right" data-index="7">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-7" src="img/s7.JPG" alt="My heart smiles whenever I'm with you 😊❤️" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-left" data-index="8">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-8" src="img/s8.JPG" alt="I love you more than words can express ❤️🌹" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate Set for Seamless Infinite Scrolling -->
+                    <div class="marquee-item tilt-left" data-index="9">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-9" src="img/s9.jpg" alt="Together is my favorite place to be 💑❤️" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-right" data-index="10">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-10" src="img/s10.JPG" alt="You're the reason my world is so colorful 🌈❤️" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-left" data-index="11">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-11" src="img/s11.jpg" alt="Our love keeps growing stronger every day ❤️💪" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-right" data-index="12">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-12" src="img/s12.JPG" alt="My forever and always 💑💖" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                    <div class="marquee-item tilt-left" data-index="13">
+                        <div class="polaroid-img-wrapper">
+                            <img id="photo-13" src="img/s13.jpg" alt="You are my happy place 😊❤️" loading="lazy" ondragstart="return false;">
+                            <div class="img-protection-overlay"></div>
+                            <div class="hover-heart-badge">💖 Expand</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Interactive Proposal Card -->
+        <section id="proposal-section" class="proposal-section">
+            <div class="proposal-card glass-panel highlight-border">
+                <div class="glowing-ring"></div>
+                <div class="big-heart-icon">💖</div>
+                
+                <h3 class="proposal-greeting">Dearest <span id="proposal-partner-name">My Love</span>,</h3>
+                <h2 id="proposal-question" class="proposal-question-text">
+                    Will You Be My Forever & Always?
+                </h2>
+                <p class="proposal-subtext">Will you walk hand in hand with me into our infinite tomorrow?</p>
+
+                <div class="buttons-container">
+                    <button id="yes-btn" class="action-btn yes-glow">
+                        <span class="btn-text">YES, I WILL! 💖</span>
+                        <span class="btn-sub">Forever Yours</span>
+                    </button>
+                    
+                    <div id="no-btn-wrapper">
+                        <button id="no-btn" class="action-btn no-evasive">
+                            <span id="no-btn-text">No 😜</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Developer Credit Glassmorphic Footer Badge -->
+    <footer class="dev-footer">
+        <div class="dev-credit-badge glass-panel">
+            <span class="dev-text">Designed &amp; Developed by</span>
+            <a href="https://github.com/rTechCoding" target="_blank" rel="noopener noreferrer" class="dev-link glow-effect">
+                <svg class="github-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span class="dev-name">Rahat Ansari | rTechCoding</span>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Password Protection Gate Screen -->
+    <div id="password-gate" class="password-overlay">
+        <div class="pass-card glass-panel">
+            <div class="lock-icon-wrapper">
+                <span class="lock-icon">🔒</span>
+                <div class="lock-glow"></div>
+            </div>
+            <h2 class="pass-title">Unlock Our Special World</h2>
+            <p class="pass-subtitle">Enter the secret passcode to enter 💖</p>
+            
+            <form id="password-form" class="pass-form">
+                <div class="pass-input-wrapper">
+                    <input type="password" id="pass-input" placeholder="Enter passcode..." autocomplete="off" required>
+                    <button type="submit" id="pass-submit-btn" class="pass-btn">
+                        <span>Unlock 🔑</span>
+                    </button>
+                </div>
+                <p id="pass-error-msg" class="pass-error"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Celebration Modal (Appears when YES is clicked) -->
+    <div id="celebration-modal" class="modal-overlay">
+        <div class="modal-content glass-panel certificate-card">
+            <button id="close-celebration-btn" class="close-modal-btn">✕</button>
+            
+            <div class="certificate-border">
+                <div class="certificate-header">
+                    <span class="gold-crown">👑</span>
+                    <h2 class="cert-title">Certificate of Eternal Love</h2>
+                    <p class="cert-subtitle">Officially Sealed in the Stars</p>
+                </div>
+
+                <div class="cert-body">
+                    <p>This certifies that on this day</p>
+                    <div id="cert-date" class="cert-date-str">October 12 , 2025</div>
+                    <h3 class="cert-names">
+                        <span id="cert-partner">My Love</span> <span class="ampersand">&amp;</span> <span id="cert-proposer">Your Partner</span>
+                    </h3>
+                    <p class="cert-declaration">
+                        Have bound their hearts together in endless joy, laughter, and unbreakable affection forevermore! 💍
+                    </p>
+                </div>
+
+                <div class="cert-footer">
+                    <div class="sig-block">
+                        <span class="sig-line" id="sig-partner">My Love</span>
+                        <span class="sig-label">Partner's Signature</span>
+                    </div>
+                    <div class="cert-seal">
+                        <span>💖</span>
+                        <small>Eternity Seal</small>
+                    </div>
+                    <div class="sig-block">
+                        <span class="sig-line" id="sig-proposer">Your Partner</span>
+                        <span class="sig-label">Proposer Signature</span>
+                    </div>
+                </div>
+
+                <button id="download-cert-btn" class="cert-action-btn">
+                    <span>✨ Save Love Contract</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customizer Side Drawer Modal -->
+    <div id="customizer-modal" class="modal-overlay">
+        <div class="drawer-content glass-panel">
+            <div class="drawer-header">
+                <h3>⚙️ Personalize Your Proposal</h3>
+                <button id="close-customizer-btn" class="close-modal-btn">✕</button>
+            </div>
+
+            <form id="customizer-form" class="customizer-form">
+                <div class="form-group">
+                    <label for="input-partner-name">Partner's Name</label>
+                    <input type="text" id="input-partner-name" placeholder="e.g. Juliet / Sweetheart" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-proposer-name">Your Name</label>
+                    <input type="text" id="input-proposer-name" placeholder="e.g. Romeo / Lover" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-proposal-question">Proposal Question</label>
+                    <input type="text" id="input-proposal-question" placeholder="e.g. Will You Marry Me? 💍">
+                </div>
+
+                <div class="form-group">
+                    <label for="input-start-date">Love Start / Proposal Date</label>
+                    <input type="text" id="input-start-date" value="2025-10-12" placeholder="e.g. October 12, 2025 or 2025-10-12">
+                </div>
+
+                <div class="form-group">
+                    <label for="input-music-url">Background Music MP3 Link 🎵 (Phir Aur Kya Chahiye)</label>
+                    <input type="url" id="input-music-url" placeholder="https://archive.org/download/best-of-2023-bollywood-songs/Zara%20Hatke%20Zara%20Bachke%20%282023%29%20-%20Phir%20Aur%20Kya%20Chahiye.mp3">
+                </div>
+
+                <div class="form-group">
+                    <label for="input-story-1">Story Chapter 1</label>
+                    <textarea id="input-story-1" rows="3" placeholder="First time we met..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-story-2">Story Chapter 2</label>
+                    <textarea id="input-story-2" rows="3" placeholder="Why you are so special to me..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-story-3">Story Chapter 3</label>
+                    <textarea id="input-story-3" rows="3" placeholder="My promise for our future..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-custom-btn">Save Changes 💖</button>
+                    <button type="button" id="share-link-btn" class="share-btn">🔗 Copy Shareable Proposal Link</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup Memory Photo Slider Modal -->
+    <div id="gallery-modal" class="modal-overlay">
+        <div class="gallery-slider-card glass-panel">
+            <button id="close-gallery-btn" class="close-modal-btn">✕</button>
+            
+            <div class="slider-wrapper">
+                <button id="prev-slide-btn" class="slider-nav-btn prev-btn" aria-label="Previous Photo">❮</button>
+
+                <div class="slide-content">
+                    <div class="slide-img-container">
+                        <img id="slider-img" src="" alt="Memory Photo" ondragstart="return false;">
+                        <div class="img-protection-overlay"></div>
+                    </div>
+                    <p id="slider-caption" class="slider-caption-text"></p>
+                    <div class="slide-counter">
+                        <span id="slide-current-num">1</span> / <span id="slide-total-num">3</span>
+                    </div>
+                </div>
+
+                <button id="next-slide-btn" class="slider-nav-btn next-btn" aria-label="Next Photo">❯</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-notification" class="toast">Link copied to clipboard! Share it with your love 💌</div>
+
+    <!-- Application Scripts -->
+    <script src="assets/particles.js"></script>
+    <script src="assets/audio.js"></script>
+    <script src="assets/customizer.js"></script>
+    <script src="assets/script.js"></script>
+    <script src="assets/games.js"></script>
+    <script src="assets/gallery_security.js"></script>
+</body>
+</html>
